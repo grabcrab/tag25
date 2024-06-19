@@ -5,7 +5,7 @@ SparkFun Qwiic Dynamic NFC/RFID Tag with dynamic update over Wi-Fi
     - Open the platformio.ini file and change the TAG source parameters in the following way:
         -D USE_FILE=1
         -D USE_WIFI=0
-    - Open the src/tag.txt file and edit the TAG's text.
+    - Open the tags/file_tag.txt file and edit the TAG's text.
     - Upload the firmware.
     - Scan the ТАG, check if the text from the TAG matches the text from the file.
 
