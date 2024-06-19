@@ -1,0 +1,5 @@
+TEST 1
+
+The ST25DV64KC includes 64 Kbit EEPROM for users to write and read data from, a general purpose output to act as an external interrupt reporting events such as RF field changes, RF activity, I2C writes and RF switch toggling over I2C. The IC has a supply voltage range of 1.8V to 5.5V though when in a Qwiic circuit it runs at 3.3V. It also includes an energy harvesting pin capable of outputing µW of power with an RF field of sufficient strength. For a complete overview of the ST25DV64KC, refer to the datasheet.
+
+The ST25DV64KC supports a fast transfer mode to send the contents of a 256 byte buffer between a device connected to the tag over I2C (refered to as the tag's Mailbox) and an RF device such as a reader or smartphone. This makes it so you can store data on the tag and have it available for reading by an RF device by simply bringing it into the RF read range, even if the tag is powered off. This data can also be password protected with a 64-bit value.
