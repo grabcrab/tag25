@@ -31,8 +31,12 @@ void processWiFi(void)
         unsigned long ms = millis();
         wifiStr = wifiGetString(WIFI_TAG_TEXT_LINK);
         unsigned long deltaMs = millis() - ms;
-        Serial.println(wifiStr);
-        Serial.println();
+        if (PRINT_WIFI_STRING)
+        {
+            Serial.println("The TAG string received:");
+            Serial.println(wifiStr);
+            Serial.println("\n\n");
+        }
         if (wifiStr != "")
         {
             if (wifiStr != prev_wifiStr)
