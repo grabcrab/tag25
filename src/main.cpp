@@ -3,6 +3,7 @@
 #include "wifiUtils.h"
 
 static String wifiStr = "";
+static String prev_wifiStr = "";
 
 void processFile(void)
 {
@@ -26,20 +27,31 @@ void processWiFi(void)
             continue;
         }
         wifiPrintStatus();
-        Serial.printf("Getting the TAG text by the link: %s\r\n", WIFI_TAG_TEXT_LINK);
+        Serial.printf("Getting the TAG text by the link: %s \r\n", WIFI_TAG_TEXT_LINK);
+        unsigned long ms = millis();
         wifiStr = wifiGetString(WIFI_TAG_TEXT_LINK);
+        unsigned long deltaMs = millis() - ms;
         //Serial.println(wifiStr);
         //Serial.println();
         if (wifiStr != "")
         {
-            setText(wifiStr);
-            writeTag();
-            if (PRINT_TAG)
-                printTag();
+            if (wifiStr != prev_wifiStr)
+            {
+                Serial.printf("New TAG data received by the link in %lu ms\r\n", deltaMs);                
+                setText(wifiStr);
+                writeTag();
+                if (PRINT_TAG)
+                    printTag();
+                prev_wifiStr = wifiStr;
+            }
+            else 
+            {
+                Serial.println("No new TAG data received by the link, SKIPPING");
+            }
         }
         else
         {
-            Serial.println("Warning!!! Empty string received from the server, connection or server error!");
+            Serial.println("\r\nWarning!!! Empty string received from the server, connection or server error!");
         }
         Serial.printf("Delayed for %ds\r\n\n\n", WIFI_GET_INTERVAL_S);
         delay(WIFI_GET_INTERVAL_S * 1000);

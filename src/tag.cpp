@@ -62,7 +62,16 @@ void writeTag(void)
 
     uint16_t memLoc = tag.getCCFileLen();
 
-    Serial.println(F("Writing the NDEF Text record"));
-    if (!tag.writeNDEFText(theText, &memLoc))
+    Serial.print(F("Writing the NDEF Text record..."));
+    unsigned long ms = millis();
+    bool res = tag.writeNDEFText(theText, &memLoc);
+    unsigned long deltaMs = millis() - ms;
+    if (res)
+    {
+        Serial.printf(" done in %lu ms\r\n", deltaMs);
+    }
+    else
+    {
         Serial.println("ERROR writing record!!!");
+    }
 }
