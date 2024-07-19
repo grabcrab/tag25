@@ -143,9 +143,10 @@ String wifiGetString(String fileLink)
 {
     HTTPClient http;
 
-    String payload = "0";
-
+    String payload = "0";   
     http.begin(fileLink);
+    http.clearAllCookies();
+    http.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     int httpCode = http.GET();
     if (httpCode > 0)
     {
